@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Reliance Digital</title>
+</head>
+
+<body>
+    <header>
+        <img src="logo.png" alt="logo">
+    </header>
+
+    <main>
+        <div id="camera" class="left"></div>
+        <div class="right">
+            <p>See what <br><b>Reliance Digital</b> <br>has to say about you</p>
+            <button onclick="takePicture()">Click</button>
+        </div>
+
+    </main>
+    <footer>
+        Copyright &copy; Prachi Sandal
+    </footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+<script>
+    Webcam.set({
+        width: 650,
+        height: 600,
+        image_format: 'jpeg',
+        jpeg_quality: 100
+    })
+    Webcam.attach("#camera")
+
+    const takePicture = () => {
+        Webcam.snap(
+            (data_uri) => {
+                localStorage.setItem("image", data_uri);
+            }
+        )
+        window.location.href = "static.html";
+
+    }
+</script>
+
+</html>
