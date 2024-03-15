@@ -16,7 +16,7 @@
     <main>
         <div id="camera" class="left"></div>
         <div class="right">
-            <p>Randam text of that person</p>
+            <p id="randomText">Randam text of that person</p>
             <button onclick="takeNext()" id="nextButton">Next</button>
         </div>
     </main>
@@ -31,18 +31,29 @@
     setInterval(() => {
         document.getElementById("nextButton").innerHTML = "Next ( " + remainingSecs + " s )";
         remainingSecs = remainingSecs - 1;
-        console.log(remainingSecs)
+
         if (remainingSecs <= 0) {
             takeNext();
         }
     }, 1000)
 
-    document.getElementById("camera").innerHTML = '<img src=' + image_src + ' style="height:380px;width:650px;">';
+    document.getElementById("camera").innerHTML = '<img src=' + image_src + ' style="height:600px;width:650px;">';
 
 
     const takeNext = () => {
         window.location.href = 'index.html';
     }
+
+    let user = "prachi";
+    let storageList = localStorage.getItem(user);
+    let list = (storageList == null) ? [] : JSON.parse(storageList);
+
+    list = list.filter(value => value[1]);
+
+    let randomIndex = Math.floor(Math.random() * list.length);
+
+    document.getElementById("randomText").innerHTML = list[randomIndex][0];
+
 </script>
 
 </html>
